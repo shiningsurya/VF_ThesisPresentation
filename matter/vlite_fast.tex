@@ -2,22 +2,21 @@
 %% starts with section in the maintex
 
 \begin{frame}{Single antenna}
-\begin{columns}
-\begin{column}
+\begin{columns}[onlytextwidth]
+\column{0.5\textwidth}
 	\begin{itemize}
-		\item $320|384$ MHz \hfill P-band
+		\item $320-384$ MHz \hfill P-band
 		\item 25m dish
 		\item Commensal 
 		\item Different baselines possible
-		\item angular resolution $\sim 0.04\"$
+		\item Angular resolution $\sim 0.04$
 	\end{itemize}
-\end{column}
-\begin{column}
+
+\column{0.5\textwidth}
 	\begin{itemize}
 		\item vlite-fast codebase developed and maintained by Matthew Kerr
 	\end{itemize}
 \end{columns}
-	\includegraphics[width=\textwidth,keepaspectratio]{single_dish.png}
 \end{frame}
 
 \begin{frame}{MPI Coadder \hfill Warp core}
@@ -28,7 +27,7 @@
 		\item $12$ node GPU-backed Infiniband-connected cluster.
 		\item Message Passing Interface tuned for real-time performance.
 			\begin{itemize}
-				\item \textttt{MCA Collective Reduce = Rabenseifner}
+				\item \texttt{MCA Collective Reduce = Rabenseifner}
 				\item Disable all ethernet (tcp) communications!
 				\item \dots
 			\end{itemize}
@@ -41,26 +40,26 @@
 		\item Written by Ben Bardsdell during his PhD at Swinburne!
 		\item Matched-filter based approach. 
 	\end{itemize}
-	\begin{listing}
-		for DM in DM-trial
-			for Width in 2**[0..MaxWidth] 
-				MatchedFilter (Dedisperse(Input, DM), Width)
-			end
-		end
-	\end{listing}
+% 	\begin{verbatim}
+% 		for DM in DM-trial
+% 			for Width in 2**[0..MaxWidth] 
+% 				MatchedFilter (Dedisperse(Input, DM), Width)
+% 			end
+% 		end
+% \end{verbatim}
 	\begin{itemize}
 		\item DM-level coincidencing \hfill Max S/N
 		\item Very high False Positive rates!
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Triggering logic | End products}
+\begin{frame}[allowframebreaks]{Triggering logic | End products}
 	\begin{itemize}
 		\item Currently applying cuts: 
 		\begin{align}
 			{\rm S/N} &\geq 8.5 \\
 			{\rm DM}  &\geq 50 {\rm pc/cc} \\
-			{\rm Width} &\geq 10 {\rm ms}
+			{\rm Width} &\leq 100 {\rm ms}
 		\end{align}
 		\item Two mutually exclusive trigger channels: 
 			\begin{itemize}
@@ -76,27 +75,28 @@
 					Raw binary file dump. \\
 					Two polarization voltage series.
 			\end{description}
-		\item An $8$-second of voltage data is $\sim 48$x more space than filterbank data.
+		\item An $8$-second of voltage data needs $\sim 48$x more space than filterbank data. 
+		\item Low frequency $\implies$ DM-delay is already large!
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Codebases}
-\begin{columns}
-	\begin{column}
+\begin{columns}[onlytextwidth]
+	\column{0.5\textwidth}
 	\begin{itemize}
 		\item \textbf{\large Asgard} \hfill C++11
 		\item MPI Coadder
 		\item Filterbank triggering
 		\item Regular data analysis, visualization, and meta analysis.
+		\item C++ $\sim 7k$ loc
+		\item Python $\sim 2k$ loc
 	\end{itemize}
-	\end{column}
 
-	\begin{column}
+	\column{0.5\textwidth}
 	\begin{itemize}
 		\item \textbf{\large vlite-fast} \hfill C,CUDA
 		\item Maintained and developed by \textbf{ Matthew Kerr } \emph{ (co-advisor) }
 		\item Voltage packets from antennas $\to$ filterbanking on GPU
 	\end{itemize}
-	\end{column}
 \end{columns}
 \end{frame}

@@ -16,7 +16,7 @@
 		\begin{align}
 			{\rm S/N} &\geq 8.5 \\
 			{\rm DM}  &\geq 50 {\rm pc/cc} \\
-			{\rm Width} &\geq 10 {\rm ms}
+			{\rm Width} &\leq 100 {\rm ms}
 		\end{align} $\implies$ trigger-rate $\approx 13/$hr.
 		\item Reducing S/N would significantly increase the trigger rate.
 		\item False positives waste: \begin{itemize}
@@ -44,17 +44,20 @@
 \end{frame}
 
 \subsection{Feature engineering}
-\begin{frame}{Bowtie}
-	\begin{figure}
-	\includegraphics[width=\textwidth,keepaspectratio]{bt_flat.png}
-	\label{fig:bt_flat}
-	\caption{Offsource ping from Crab psr. S/N=106.58 \emph{(highest)}}
-	\end{figure}
+\begin{frame}{Bowtie plane}
+\begin{columns}[onlytextwidth]
+\column{0.7\textwidth}
+\includegraphics[width=\textwidth,keepaspectratio]{bt_flat.png}
+\column{0.3\textwidth}
+\begin{itemize}
+    \item Offsource ping from Crab psr. S/N=106.58 \emph{(highest)}
+\end{itemize}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Candidate plot}
+\begin{frame}
 	\begin{figure}
-	\includegraphics[width=\textwidth,keepaspectratio]{}
+	\includegraphics[width=\textwidth,keepaspectratio]{candplot.png}
 	\label{fig:candplot}
 	\end{figure}
 \end{frame}
@@ -68,17 +71,25 @@
 	\item $\mathcal{O}(N)$ operation
 	\item Bowtie plane: the most computationally expensive.
 	\item Fast De-dispersion Measure Transform (FDMT) \hfill \cite{fdmt}
-	\item Power of skewness and kurtosis:
-		\begin{figure}
-			\includegraphics[width=.7\textwidth,keepaspectratio]{corner_td_sk.png}
-			\label{fig:corner}
-			\caption{Discriminability}
-		\end{figure}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Still a long way!}
+\begin{frame}{Power of skewness and kurtosis}
+\begin{columns}[onlytextwidth]
+\column{0.7\textwidth}
+\includegraphics[width=\textwidth,keepaspectratio]{corner_td_sk.png}
+\column{0.3\textwidth}
 \begin{itemize}
-	\item 
+    \item Not linearly separable! But some structure for ML!
+    \item Tree based ML
+    \item Support Vector Machine with kernel trick
+    \item Discriminability. Skewness and kurtosis of S/N(t),S/N(DM).
 \end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\vspace{\vfill}
+{\Huge Still a long way!}
+\vspace{\vfill}
 \end{frame}
